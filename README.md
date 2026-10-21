@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" alt="slopify logo: a megaphone spraying slop" width="220">
+  <img src="assets/slopify-logo.png" alt="slopify logo: a megaphone spraying slop" width="220">
 </p>
 
 <h1 align="center">slopify</h1>
