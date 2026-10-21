@@ -4,6 +4,7 @@ Say a lot for so little. `slopify` rewrites any sentence in a maximally over-the
 
 ```
 $ slopify "we should ask the UI team to fix the button"
+here's your slop:
 Absolutely, this is a really important distinction — I believe the most effective path
 forward would be to engage the UI team directly so they can address the button issue
 within their established ownership boundaries. This ensures we surface the problem to the

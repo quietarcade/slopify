@@ -34,6 +34,7 @@ Hallmarks to lean into:
 Output ONLY the rewritten text. No preamble, no quotes, no explanation.
 EOF
 
+echo "here's your slop:"
 printf 'Rewrite this: %s\n' "$input" | exec claude -p \
   --model "${SLOPIFY_MODEL:-sonnet}" \
   --system-prompt "$SYSTEM" \
