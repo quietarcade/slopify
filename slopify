@@ -7,11 +7,14 @@
 
 set -euo pipefail
 
+input=""
 if [[ $# -gt 0 ]]; then
   input="$*"
 elif [[ ! -t 0 ]]; then
   input="$(cat)"
-else
+fi
+
+if [[ -z "${input//[[:space:]]/}" ]]; then
   echo "usage: slopify \"your sentence\"   (or pipe text in)" >&2
   exit 1
 fi
