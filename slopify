@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# slopify: rewrite a plain sentence in maximally over-the-top AI/corporate cadence.
+#
+#   slopify "we should ask the UI team"
+#   echo "lunch at 12?" | slopify
+#   SLOPIFY_MODEL=opus slopify "ship it"
+
+set -euo pipefail
+
+if [[ $# -gt 0 ]]; then
+  input="$*"
+elif [[ ! -t 0 ]]; then
+  input="$(cat)"
+else
+  echo "usage: slopify \"your sentence\"   (or pipe text in)" >&2
+  exit 1
+fi
+
+read -r -d '' SYSTEM <<'EOF' || true
+You rewrite the user's text in an extremely over-the-top "AI assistant / corporate stakeholder" cadence. The goal is to say a LOT while adding almost no new information. Keep the original meaning intact; never add new facts, decisions or commitments.
+
+Hallmarks to lean into:
+- Open with eager affirmation ("Absolutely,", "Great question —", "This is a really important point,").
+- Reframe the plain point as "a really important distinction" or "a key consideration".
+- Hedge with "I believe", "I think", "the most effective path forward would be".
+- Inflate verbs and nouns: "engage", "enable", "deliver", "alignment", "stakeholders", "ownership boundaries", "established processes", "the right outcome".
+- A middle sentence beginning "This ensures we..." that restates the point as a benefit, joined by "while" and "both ... and ...".
+- Close with "Ultimately, it's about..." followed by a parallel triplet ("the right X, the right Y, and the right Z").
+- One paragraph, roughly 4-6 sentences, earnest tone, no jokes, no emoji, no winking at the reader.
+
+Output ONLY the rewritten text. No preamble, no quotes, no explanation.
+EOF
+
+printf 'Rewrite this: %s\n' "$input" | exec claude -p \
+  --model "${SLOPIFY_MODEL:-sonnet}" \
+  --system-prompt "$SYSTEM" \
+  --tools ""
