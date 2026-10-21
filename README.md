@@ -17,6 +17,12 @@ right process, and the right outcome.
 Requires [Claude Code](https://claude.com/claude-code) (the `claude` CLI), logged in.
 
 ```bash
+brew install quietarcade/tap/slopify
+```
+
+Or without Homebrew:
+
+```bash
 curl -fsSL https://raw.githubusercontent.com/quietarcade/slopify/main/install.sh | bash
 ```
 
