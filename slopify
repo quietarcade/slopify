@@ -41,7 +41,20 @@ Output ONLY the rewritten text. No preamble, no quotes, no explanation.
 EOF
 
 echo "slop time:"
-printf 'Rewrite this: %s\n' "$input" | exec claude -p \
+slop="$(printf 'Rewrite this: %s\n' "$input" | claude -p \
   --model "${SLOPIFY_MODEL:-sonnet}" \
   --system-prompt "$SYSTEM" \
-  --tools ""
+  --tools "")"
+echo "$slop"
+
+# Entirely made-up resource bill, scaled by how much slop was produced.
+words=$(wc -w <<<"$slop" | tr -d ' ')
+kwh=$(( words * (37 + RANDOM % 40) ))
+litres=$(( words * (180 + RANDOM % 120) ))
+litres_fmt="$litres"
+while [[ "$litres_fmt" =~ ^([0-9]+)([0-9]{3})(.*)$ ]]; do
+  litres_fmt="${BASH_REMATCH[1]},${BASH_REMATCH[2]}${BASH_REMATCH[3]}"
+done
+echo
+printf '⚡ %d.%d kWh · 💧 %s litres of water evaporated to produce this slop\n' \
+  $(( kwh / 10 )) $(( kwh % 10 )) "$litres_fmt"
