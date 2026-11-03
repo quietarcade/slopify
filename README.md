@@ -25,6 +25,7 @@ processes and keeping accountability clear. Ultimately, it's about the right tea
 right process, and the right outcome.
 
 ⚡ 412.7 kWh · 💧 16,384 litres of water evaporated to produce this slop
+That could have powered a fridge for 275 days! Oh well!
 ```
 
 Eleven words in. <img src="assets/slop.png" alt="slop" height="18"> A full paragraph of thought leadership out. <img src="assets/slop.png" alt="slop" height="18"> Nothing new was added: no facts, no decisions, no commitments. Just pure, premium, ethically sourced slop. <img src="assets/slop.png" alt="slop" height="18"><img src="assets/slop.png" alt="slop" height="18"><img src="assets/slop.png" alt="slop" height="18">
@@ -37,7 +38,7 @@ Eleven words in. <img src="assets/slop.png" alt="slop" height="18"> A full parag
 - <img src="assets/slop.png" alt="slop" height="18"> 📅 **Performance reviews that write themselves.** Slop your self-review and watch "fixed some bugs" become a multi-quarter narrative about enabling the right outcomes.
 - <img src="assets/slop.png" alt="slop" height="18"> 🛡️ **Total accountability insulation.** Your slop commits to nothing, so nothing can be held against you. It's not avoiding ownership. It's *respecting ownership boundaries*.
 - <img src="assets/slop.png" alt="slop" height="18"> 🤝 **Stakeholder alignment.** You won't know who the stakeholders are. They won't either. Everyone will feel aligned.
-- <img src="assets/slop.png" alt="slop" height="18"> 🌍 **Radical resource transparency.** Every slop ends with an itemised bill for the electricity and water it took to produce. The numbers are completely made up, but they scale with the word count, so the sloppier you go, the more lakes you drain. Share it in your next sustainability all-hands.
+- <img src="assets/slop.png" alt="slop" height="18"> 🌍 **Radical resource transparency.** Every slop ends with an itemised bill for the electricity and water it took to produce. The numbers are completely made up, but they scale with the word count, so the sloppier you go, the more lakes you drain. It even tells you what you could have done with all that power and water instead. Oh well! Share it in your next sustainability all-hands.
 - <img src="assets/slop.png" alt="slop" height="18"> ⏱️ **Meetings that slop themselves.** Read a slopified message aloud and you've filled a 30-minute sync. Do two and you've earned a follow-up meeting.
 
 > <img src="assets/slop.png" alt="slop" height="18"> "I used to write 'sounds good'. Now I write a paragraph. I have since been asked to lead three working groups." <img src="assets/slop.png" alt="slop" height="18">
