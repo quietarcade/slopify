@@ -56,39 +56,56 @@ commas() {
 }
 
 # Entirely made-up resource bill, scaled by how much slop was produced.
+in_words=$(wc -w <<<"$input" | tr -d ' ')
 words=$(wc -w <<<"$slop" | tr -d ' ')
 kwh10=$(( words * (37 + RANDOM % 40) ))   # tenths of a kWh
 litres=$(( words * (180 + RANDOM % 120) ))
+kwh="$(( kwh10 / 10 )).$(( kwh10 % 10 ))"
+
+said="$(tr -s '[:space:]' ' ' <<<"$input" | sed 's/^ //; s/ $//')"
+if (( ${#said} > 40 )); then
+  said="${said:0:40}"
+  said="${said% }…"
+fi
+
+bills=(
+  "⚡ $kwh kWh · 💧 $(commas "$litres") litres of fresh water boiled off so you didn't have to write a paragraph yourself"
+  "⚡ $kwh kWh · 💧 $(commas "$litres") litres of drinkable water, gone, so you could sound strategic"
+  "⚡ $kwh kWh · 💧 $(commas "$litres") litres of water evaporated into a data centre's cooling tower on your behalf"
+)
 echo
-printf '⚡ %d.%d kWh · 💧 %s litres of water evaporated to produce this slop\n' \
-  $(( kwh10 / 10 )) $(( kwh10 % 10 )) "$(commas "$litres")"
+echo "${bills[RANDOM % ${#bills[@]}]}"
+if (( in_words == 1 )); then
+  echo "📝 You typed 1 word. It took a warehouse of GPUs to turn it into $words."
+else
+  echo "📝 You typed $in_words words. It took a warehouse of GPUs to turn them into $words."
+fi
 
 # Rough real-world rates: fridge 1.5 kWh/day, 10W LED 87.6 kWh/year, home 29 kWh/day,
-# phone charge 0.015 kWh, EV 0.3 kWh/mile, bath 150 L, shower 65 L, 2 L drunk per day.
+# phone charge 0.015 kWh, EV 0.3 kWh/mile, bath 150 L, 2 L drunk per day,
+# 20 L/day WHO basic water need.
 facts=(
-  "That could have powered a fridge for $(commas $(( kwh10 / 15 ))) days!"
-  "That could have powered an LED bulb for $(( kwh10 / 876 )) years!"
-  "That could have powered an average home for $(( kwh10 / 290 )) days!"
-  "That could have charged your phone $(commas $(( kwh10 * 100 / 15 ))) times!"
-  "That could have driven an electric car $(commas $(( kwh10 / 3 ))) miles!"
-  "That could have filled $(commas $(( litres / 150 ))) bathtubs!"
-  "That could have run $(commas $(( litres / 65 ))) showers!"
-  "That could have kept a person hydrated for $(( litres / 730 )) years!"
+  "That's a family fridge running for $(commas $(( kwh10 / 15 ))) days, spent on \"$said\"."
+  "That's $(( litres / 730 )) years of drinking water for an actual human being, and you used it to say \"$said\"."
+  "That's an average home's electricity for $(( kwh10 / 290 )) days, so you could avoid typing a few extra sentences."
+  "That's $(commas $(( litres / 150 ))) bathtubs of clean water. $(commas $(( litres / 150 ))) bathtubs. For \"$said\"."
+  "That's $(commas $(( kwh10 / 3 ))) miles in an electric car. You could have driven over and just said it."
+  "That's a day's basic water for $(commas $(( litres / 20 ))) people, traded for \"$said\"."
+  "That's the LED bulb in your room left on for $(( kwh10 / 876 )) years. Instead, you got this."
+  "That's $(commas $(( kwh10 * 100 / 15 ))) phone charges. Your phone is on 12%, by the way."
 )
-shrugs=(
-  "Oh well!"
-  "Who cares!"
-  "Worth it."
-  "Anyway!"
-  "Not my problem!"
-  "Whatever!"
-  "Meh."
-  "Eh, the planet will be fine."
-  "Totally worth it for this paragraph."
-  "Moving on!"
-  "Shrug."
-  "Ah well, there's always next planet!"
-  "But think of the engagement!"
-  "Small price to pay for synergy."
+closers=(
+  "Hope the kudos were worth it."
+  "But sure, it sounds more strategic now."
+  "Somewhere, a polar bear just read your standup."
+  "Your grandkids will understand. Probably."
+  "Great use of a planet."
+  "Anyway, the river didn't need it."
+  "The glaciers send their regards."
+  "But hey, you got a 🙌 on Slack."
+  "Don't think about it too hard."
+  "Sleep well!"
+  "No pressure."
+  "Totally worth it, right?"
 )
-echo "${facts[RANDOM % ${#facts[@]}]} ${shrugs[RANDOM % ${#shrugs[@]}]}"
+echo "${facts[RANDOM % ${#facts[@]}]} ${closers[RANDOM % ${#closers[@]}]}"
