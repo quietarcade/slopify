@@ -47,14 +47,32 @@ slop="$(printf 'Rewrite this: %s\n' "$input" | claude -p \
   --tools "")"
 echo "$slop"
 
+commas() {
+  local n="$1"
+  while [[ "$n" =~ ^([0-9]+)([0-9]{3})(.*)$ ]]; do
+    n="${BASH_REMATCH[1]},${BASH_REMATCH[2]}${BASH_REMATCH[3]}"
+  done
+  echo "$n"
+}
+
 # Entirely made-up resource bill, scaled by how much slop was produced.
 words=$(wc -w <<<"$slop" | tr -d ' ')
-kwh=$(( words * (37 + RANDOM % 40) ))
+kwh10=$(( words * (37 + RANDOM % 40) ))   # tenths of a kWh
 litres=$(( words * (180 + RANDOM % 120) ))
-litres_fmt="$litres"
-while [[ "$litres_fmt" =~ ^([0-9]+)([0-9]{3})(.*)$ ]]; do
-  litres_fmt="${BASH_REMATCH[1]},${BASH_REMATCH[2]}${BASH_REMATCH[3]}"
-done
 echo
 printf '⚡ %d.%d kWh · 💧 %s litres of water evaporated to produce this slop\n' \
-  $(( kwh / 10 )) $(( kwh % 10 )) "$litres_fmt"
+  $(( kwh10 / 10 )) $(( kwh10 % 10 )) "$(commas "$litres")"
+
+# Rough real-world rates: fridge 1.5 kWh/day, 10W LED 87.6 kWh/year, home 29 kWh/day,
+# phone charge 0.015 kWh, EV 0.3 kWh/mile, bath 150 L, shower 65 L, 2 L drunk per day.
+facts=(
+  "That could have powered a fridge for $(commas $(( kwh10 / 15 ))) days!"
+  "That could have powered an LED bulb for $(( kwh10 / 876 )) years!"
+  "That could have powered an average home for $(( kwh10 / 290 )) days!"
+  "That could have charged your phone $(commas $(( kwh10 * 100 / 15 ))) times!"
+  "That could have driven an electric car $(commas $(( kwh10 / 3 ))) miles!"
+  "That could have filled $(commas $(( litres / 150 ))) bathtubs!"
+  "That could have run $(commas $(( litres / 65 ))) showers!"
+  "That could have kept a person hydrated for $(( litres / 730 )) years!"
+)
+echo "${facts[RANDOM % ${#facts[@]}]} Oh well!"
