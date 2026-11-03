@@ -75,4 +75,20 @@ facts=(
   "That could have run $(commas $(( litres / 65 ))) showers!"
   "That could have kept a person hydrated for $(( litres / 730 )) years!"
 )
-echo "${facts[RANDOM % ${#facts[@]}]} Oh well!"
+shrugs=(
+  "Oh well!"
+  "Who cares!"
+  "Worth it."
+  "Anyway!"
+  "Not my problem!"
+  "Whatever!"
+  "Meh."
+  "Eh, the planet will be fine."
+  "Totally worth it for this paragraph."
+  "Moving on!"
+  "Shrug."
+  "Ah well, there's always next planet!"
+  "But think of the engagement!"
+  "Small price to pay for synergy."
+)
+echo "${facts[RANDOM % ${#facts[@]}]} ${shrugs[RANDOM % ${#shrugs[@]}]}"
